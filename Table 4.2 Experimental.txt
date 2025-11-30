@@ -1,0 +1,15 @@
+#Esto es el fichero de datos experimentales de v_s y v_c. Separador decimal tiene que ser '.'.
+#Separador de columnas - ' '. Tiene que haber exactamente 12 filas de datos. 
+V_s  V_c
+1.0578    6.9862
+2.0578    8.9862
+3.0578    5.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
+3.0578    4.9862
