@@ -6,6 +6,9 @@ inductancia = 330E-6  # sustituir por el valor experimental de la inductancia
 capasitancia = 82E-6  # sustituir por el valor experimental de la capasitancia
 resistencia_g = 50
 
+# 330E-6 significa 330 * 10^-6 que es 330 microHenry
+
+# TABLA 4.1
 omega_resonancia = np.sqrt(1/inductancia/capasitancia)
 f_resonancia = omega_resonancia / 2 / np.pi
 
@@ -32,7 +35,6 @@ def v_s_teorico(f): return np.abs(v_g * (z_L(f) + z_C(f)) /
 def v_c_teorico(f): return np.abs(v_g * np.abs(z_C(f)) /
                                   np.sqrt(resistencia_g ** 2 + (z_L(f) + z_C(f)) ** 2))
 
-
 """
 frecuencias - es un array de numeros entre 0.01*f0 y 100*f0 equiespaciado en la escala logaritmica
 z_L = wL
@@ -44,7 +46,7 @@ filename = "Table 4.2 Experimental.txt"
 # RECUERDA CAMBIAR LOS DATOS EXPERIMENTALES A LOS TUYOS!!!!!
 v_s_exp, v_c_exp = np.genfromtxt(filename, skip_header=3, unpack=True)
 
-print('\n'*3)
+print('\n'*2)
 print(f"|{" ":^20}|{"Experimental":^20} ||{"Teorico":^20} |")
 print('—'*80)
 print(f"|{"Frecuencia, Hz":^20}|{"V_s, V":^10}|{"V_c, V":^10}||{"V_s, V":^10}|{"V_c, V":^10}|")
@@ -63,12 +65,14 @@ if True:
     y = np.abs(v_s_teorico(x) / v_g)
     ax1.semilogx(x, y, 'b-', label=r"$T(f)_{teor}$")
     ax1.set_ylim(0, 1)
+    # Si quieres quitar la linea verde en la frecuencia de resonancia - comenta la linea abajo
     ax1.axvline(f_resonancia, color='g', label="$f_0$")
+
     ax1.scatter(frecuencias, funcion_transferencia_exp,
                 color="r", label=r"$T(f)_{exp}$")
     ax1.grid(True, which='both')
     ax1.set_xlabel('$f$, Hz')
-    ax1.set_ylabel(r"$|V_s|/|V_g|$", )
+    ax1.set_ylabel(r"$|V_s|/|V_g|$")
     ax1.legend()
     plt.title(
         'Representacion de la funcion de transferencia para el circuito de la tarea 1')
