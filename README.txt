@@ -1,5 +1,5 @@
-Esto es un repositorio con el programa para realizar la práctica 4 de la asignatura Circuitos eléctricos.
-El fichero "practica4.py" contiene el código en Python para resolver la Tarea 1, en particular:
+Esto es un repositorio con el programa para realizar
+la practica 4 de la asignatura Circuitos electricos.
 
 Calcula la frecuencia de resonancia.
 

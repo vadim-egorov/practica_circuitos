@@ -9,7 +9,7 @@ resistencia_g = 50
 # 330E-6 significa 330 * 10^-6 que es 330 microHenry
 
 # TABLA 4.1
-omega_resonancia = np.sqrt(1/inductancia/capasitancia)
+omega_resonancia = np.sqrt(1/(inductancia * capasitancia))
 f_resonancia = omega_resonancia / 2 / np.pi
 
 print(f"|{"w_0, Hz":^10}|{"f_0, Hz":^10}|")
@@ -21,7 +21,25 @@ v_g = 5  # sustituir por el valor de la amplitude medido en los terminales del g
 # que no esta conectado al circuito
 
 # TABLA 4.2
-frecuencias = np.logspace(-2, 2, 12) * f_resonancia
+
+"""
+En esta parte el professor ha hecho algunos correciones.
+En lugar de usar valores de 0.01f_0 hasta 100f_0 el ha pedido usar los valores de 0.1f_0 hasta 100f_0
+y tambien anadir: f_0/2, f_0, 2*f_0
+
+Abajo esta commentada el variante que pone el guillon. 
+Dejo commentarios con codigo para los valores estandar 
+"""
+
+# ------------------------------------------------------------------------------------
+
+# frecuencias = np.logspace(-2, 2, 12) * f_resonancia
+frecuencias = np.logspace(-1, 2, 12) * f_resonancia
+frecuencias = np.concatenate(
+    (frecuencias, [f_resonancia / 2, f_resonancia, f_resonancia * 2]))
+# Aniade 3 valores f_0/2, f_0, f_0*2
+
+# -------------------------------------------------------------------------------
 
 
 def z_L(f): return 2 * np.pi * f * inductancia
@@ -60,11 +78,13 @@ if True:
     funcion_transferencia_exp = v_s_exp / v_g
 
     fig, ax1 = plt.subplots(figsize=(10, 6))
-    x = np.logspace(-2, 2, 1000) * f_resonancia
-    # y = np.abs(v_c_teorico(x) / v_s_teorico(x))
+
+    x = np.logspace(-1, 2, 1000) * f_resonancia
+    # x = np.logspace(-2, 2, 1000) * f_resonancia
+
     y = np.abs(v_s_teorico(x) / v_g)
     ax1.semilogx(x, y, 'b-', label=r"$T(f)_{teor}$")
-    ax1.set_ylim(0, 1)
+
     # Si quieres quitar la linea verde en la frecuencia de resonancia - comenta la linea abajo
     ax1.axvline(f_resonancia, color='g', label="$f_0$")
 
@@ -78,4 +98,3 @@ if True:
         'Representacion de la funcion de transferencia para el circuito de la tarea 1')
     plt.savefig("Diagrama de la funcion de transferencia.pdf", format="pdf")
     plt.show()
-# TAREA 2
