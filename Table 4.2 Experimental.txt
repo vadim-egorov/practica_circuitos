@@ -1,5 +1,5 @@
 #Esto es el fichero de datos experimentales de v_s y v_c. Separador decimal tiene que ser '.'.
-#Separador de columnas - ' '. 
+#Separador de columnas - ' '. Tres ultimas filas son para f_0/2, f_0 y 2f_0 en este orden
 V_s  V_c
 2.04    2.04
 1.1      1.14 
